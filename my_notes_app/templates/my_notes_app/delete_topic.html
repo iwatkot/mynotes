@@ -1,0 +1,30 @@
+{% extends 'my_notes_app/base.html' %}
+{% load bootstrap4 %}
+{% block page_header %}
+  <h1 style='color: #646464;'>Delete topic</h1>
+  <small style='color: #DA99A2;'>You're going to permanently delete your
+    topic. This action can not be undone.</small>
+{% endblock page_header %}
+{% block page_content %}
+  <h3>{{ topic }}</h3>
+  <div>You will also delete all notes related to this topic.</div>
+  <ul>
+    {% for note in notes %}
+      <li>{{ note }}</li>
+    {% empty %}
+      There's no notes related to this topic.
+    {% endfor %}
+  </ul>
+  <form method='post' action="{% url 'my_notes_app:delete_topic' topic.id %}" 
+    class = 'form'>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button name='submit' class='btn btn-lg' 
+        style='background-color: #DA99A2; color: white'>Delete topic
+      </button>
+      <a class='btn btn-lg' style='background-color: #99DACD;
+        color: white' href="{{request.META.HTTP_REFERER}}">Back</a>
+    {% endbuttons %}
+  </form>
+{% endblock page_content %}

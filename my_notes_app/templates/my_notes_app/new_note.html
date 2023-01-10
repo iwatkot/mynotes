@@ -1,0 +1,17 @@
+{% extends 'my_notes_app/base.html' %}
+{% load bootstrap4 %}
+{% block page_header %}
+  <h1 style='color: #646464;'>Add new note</h1>
+  <small>Choose a topic and add a new note.</small>
+{% endblock page_header %}
+{% block page_content %}
+<form method='post' action="{% url 'my_notes_app:new_note' %}" 
+  class='form'>
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  {% buttons %}
+    <button name='submit' class='btn btn-lg' 
+      style='background-color: #99DACD; color: white'>Add note</button>
+  {% endbuttons %}
+</form>
+{% endblock page_content %}

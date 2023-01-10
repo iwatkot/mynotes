@@ -1,0 +1,17 @@
+{% extends 'my_notes_app/base.html' %}
+{% load bootstrap4 %}
+{% block page_header %}
+  <h1 style='color: #646464;'>Register a new account</h1>
+  <small>Enter username and password to register a new account.</small>
+{% endblock page_header %}
+{% block page_content %}
+  <form method='post' action="{% url 'users:register' %}" class='form'>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button name='submit' class='btn btn-lg' 
+        style='background-color: #99DACD; color: white'>Register</button>
+    {% endbuttons %}
+    <input type='hidden' name='next' value="{% url 'my_notes_app:index' %}"/>
+  </form>
+{% endblock page_content %}

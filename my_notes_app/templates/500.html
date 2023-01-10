@@ -1,0 +1,10 @@
+{% extends 'my_notes_app/base.html' %}
+{% load bootstrap4 %}
+{% block page_header %}
+  <h1 style='color: #646464;'>HTTP 500</h1>
+  <small>There has been an internal error.</small>
+{% endblock page_header %}
+{% block page_content %}
+  <a class='btn btn-lg' style='background-color: #99DACD;
+    color: white' href="{% url 'my_notes_app:index' %}">Main page</a>
+{% endblock page_content %}

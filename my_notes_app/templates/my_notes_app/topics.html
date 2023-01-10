@@ -1,0 +1,42 @@
+{% extends 'my_notes_app/base.html' %}
+{% load bootstrap_icons %}
+{% block page_header %}
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm' style='color: #646464;'>
+      <h1>Topics</h1>
+      <small>Showing all topics created by you.</small>
+    </div>
+    <div class='col-sm'>
+      <a class='btn ml-2 float-right mt-1' style='color: #99DACD;'
+      href="{% url 'my_notes_app:new_topic' %}">
+      {% bs_icon 'plus-square' size='2em' %}</a>
+    </div>
+  </div>
+</div>  
+{% endblock page_header %}
+{% block page_content %}
+  {% for topic in topics %}
+    <div class='card mb-3'>
+      <div class='card-header' style='background-color: #E3E3E3;'>
+        <a class='text-secondary h2'
+          href="{% url 'my_notes_app:topic' topic.id %}">{{ topic }}</a>
+        <a class='btn float-right'
+          href="{% url 'my_notes_app:delete_topic' topic.id %}">
+          {% bs_icon 'trash3' size='1.5em' %}</a>
+        <a class='btn float-right'
+          href="{% url 'my_notes_app:edit_topic' topic.id %}">
+          {% bs_icon 'pencil-square' size='1.5em' %}</a>
+      </div>
+    </div>
+  {% empty %}
+    <div class='card mb-3'>
+      <div class='card-header' style='background-color: #E3E3E3;''>
+        <div class='btn'>No topics added</div>
+      </div>
+      <div class='card-body'>
+        There are currently no topics, but you can add a new one.
+      </div>
+    </div>
+  {% endfor %}
+{% endblock page_content %}

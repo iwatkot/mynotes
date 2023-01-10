@@ -1,0 +1,6 @@
+.git/
+mn_env/
+.gitignore
+*.sqlite3
+LICENSE.md
+README.md

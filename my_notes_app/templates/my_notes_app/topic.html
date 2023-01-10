@@ -1,0 +1,50 @@
+{% extends 'my_notes_app/base.html' %}
+{% load bootstrap_icons %}
+{% block page_header %}
+  <div class='container'>
+    <div class='row'>
+      <div class='col-sm'>
+        <h1 style='color: #646464;'>{{ topic}}</h1>
+        <small>Created: {{ topic.date|date:'M d, Y H:i' }}</small>
+      </div>
+      <div class='col-sm'>
+        <a class='btn ml-2 float-right mt-1' style='color: #99DACD;'
+          href="{% url 'my_notes_app:delete_topic' topic.id %}">
+          {% bs_icon 'trash3' size='2em' %}
+        </a>
+        <a class='btn ml-2 float-right mt-1' style='color: #99DACD;'
+          href="{% url 'my_notes_app:edit_topic' topic.id %}">
+          {% bs_icon 'pencil-square' size='2em' %}</a>
+        <a class='btn ml-2 float-right mt-1' style='color: #99DACD;'
+          href="{% url 'my_notes_app:new_note' %}">
+          {% bs_icon 'plus-square' size='2em' %}
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock page_header %}
+{% block page_content %}
+  {% for note in notes %}
+    <div class='card mb-3'>
+      <div class='card-header' style='background-color: #E3E3E3;'>
+        <span class='text-secondary h2'>
+          {{ note.date|date:'M d, Y H:i'}}</span>
+        <a class='btn float-right'
+          href="{% url 'my_notes_app:delete_note' note.id %}">
+          {% bs_icon 'trash3' size='1.5em' %}</a>
+        <a class='btn float-right'
+          href = "{% url 'my_notes_app:edit_note' note.id %}">
+          {% bs_icon 'pencil-square' size='1.5em' %}</a>
+      </div>
+      <div class='card-body'>
+        {{ note.text|linebreaks }}
+      </div>
+    </div>
+  {% empty %}  
+    <div class='card mb-3'>
+      <div class='card-header' style='background-color: #E3E3E3;'>
+        <div class='btn'>No notes added to the topic</div>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock page_content %}
